@@ -1,6 +1,6 @@
 
 void config_GPIO(){
-
+	//Teclado
     //Entradas (columnas)
 
 	PINSEL_CFG_Type pin_configuration;
@@ -27,6 +27,21 @@ void config_GPIO(){
 	    GPIO_SetDir( 2 , (1<<i) , 1);
 	}
 
+	//UART
+    pin_configuration.Portnum = 0;
+    pin_configuration.Pinnum = 2;
+    pin_configuration.Pinmode = 0;
+    pin_configuration.Funcnum = 1;
+    pin_configuration.OpenDrain = 0;
+    PINSEL_ConfigPin(&pin_configuration);
+
+    //ADC
+    pin_configuration.Portnum = 0;
+    pin_configuration.Pinnum = 23;
+    pin_configuration.Pinmode = PINSEL_PINMODE_TRISTATE;
+    pin_configuration.Funcnum = 1;
+    pin_configuration.OpenDrain = 0;
+    PINSEL_ConfigPin(&pin_configuration);
 
 }
 
