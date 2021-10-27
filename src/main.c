@@ -19,7 +19,10 @@ int main(void) {
     confADC();
 
     while(1) {
+        consoleclear();
     	readkey();
+    	data[0]=keypress;
+    	sendData();
     }
     return 0 ;
 }
