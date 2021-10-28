@@ -61,6 +61,13 @@ void config_GPIO(){
 
 }
 
+void configINT(void){
+	LPC_GPIOINT->IO2IntEnF |= (0b1111<<0);
+	LPC_GPIOINT->IO2IntClr |= (0b1111<<0);
+	LPC_GPIO2->FIOCLR |= (0b11111<<4);
+	NVIC_EnableIRQ(EINT3_IRQn);
+}
+
 void Antirebote(void){
 	uint32_t i;
 	for(i=0;i<100000;i++){};
