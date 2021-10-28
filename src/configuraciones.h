@@ -1,3 +1,9 @@
+uint8_t HoraAlarma;
+uint8_t HoraReloj;
+uint8_t MinutosAlarma;
+uint8_t MinutosReloj;
+int16_t Temp;
+uint16_t ADC0Value;
 
 void config_GPIO(){
 	//Teclado
@@ -43,6 +49,11 @@ void config_GPIO(){
     pin_configuration.OpenDrain = 0;
     PINSEL_ConfigPin(&pin_configuration);
 
+}
+
+void Antirebote(void){
+	uint32_t i;
+	for(i=0;i<100000;i++){};
 }
 
 

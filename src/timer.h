@@ -37,6 +37,27 @@ void confTimers(void){
 
 }
 
-void TIMER1_IRQHandler(void){
+void TIMER0_IRQHandler(void){
+	MinutosReloj++;
+	if(MinutosReloj == 60){
+		MinutosReloj = 0;
+		HoraReloj++;
+		if(HoraReloj == 24){
+			HoraReloj = 0;
+		}
+
+	}
+	while(0 == ADC_ChannelGetStatus(LPC_ADC,ADC_CHANNEL_0, ADC_DATA_DONE)){
+	}
+	ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF;
+
+	Temp= (ADC0Value/4096*80)-20; // Temperatura entre -20° y 60°
+
+	LPC_TIM0->IR|= (1<<1);
+
 
 }
+
+//void TIMER1_IRQHandler(void){
+
+//}
