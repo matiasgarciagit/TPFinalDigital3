@@ -47,7 +47,7 @@ void consoleclear(){
 	UART_Send(LPC_UART0, clear, sizeof(clear), BLOCKING);
 }
 
-void sendData(){
-	UART_Send(LPC_UART0, reloj, sizeof(reloj), BLOCKING);
+void sendData(unsigned char *data){
+	UART_Send(LPC_UART0, data, sizeof(reloj), BLOCKING);
 }
 

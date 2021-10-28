@@ -24,7 +24,7 @@ void confTimers(void){
     struct_config.PrescaleValue		=	1000000;
 
     struct_match.MatchChannel		=	0;
-    struct_match.IntOnMatch			=	ENABLE;
+    struct_match.IntOnMatch			=	DISABLE;
     struct_match.ResetOnMatch		=	ENABLE;
     struct_match.StopOnMatch		=	DISABLE;
     struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_NOTHING;
@@ -33,7 +33,7 @@ void confTimers(void){
     TIM_Init(LPC_TIM1, TIM_TIMER_MODE, &struct_config);
     TIM_ConfigMatch(LPC_TIM1, &struct_match);
     TIM_Cmd(LPC_TIM1, ENABLE);
-    NVIC_EnableIRQ(TIMER1_IRQn);
+    //NVIC_EnableIRQ(TIMER1_IRQn);
 
 }
 

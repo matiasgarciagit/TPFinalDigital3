@@ -16,12 +16,13 @@ uint8_t menu=0;
 
 int main(void){
 	config_GPIO();
-	//confTimers();
+	confTimers();
 	confUart();
-    confADC();
+    //confADC();
 
 
     while(1) {
+
     	if(menu==0){
     		VerificarAlarma();
     		MostrarHora();
@@ -84,7 +85,7 @@ void MostrarTemp(void){
 void MostrarHora(void){
     consoleclear();
     setReloj(HoraReloj,MinutosReloj);
-    sendData();
+    sendData(reloj);
 }
 
 void SonarAlarma(void){
