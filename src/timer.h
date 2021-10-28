@@ -36,7 +36,3 @@ void confTimers(void){
     NVIC_EnableIRQ(TIMER1_IRQn);
 
 }
-
-void TIMER1_IRQHandler(void){
-
-}

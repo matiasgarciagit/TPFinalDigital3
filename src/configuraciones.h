@@ -34,6 +34,8 @@ void config_GPIO(){
     pin_configuration.Funcnum = 1;
     pin_configuration.OpenDrain = 0;
     PINSEL_ConfigPin(&pin_configuration);
+    pin_configuration.Pinnum = 3;
+    PINSEL_ConfigPin(&pin_configuration);
 
     //ADC
     pin_configuration.Portnum = 0;

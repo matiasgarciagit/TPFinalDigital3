@@ -18,8 +18,10 @@ int main(void) {
 	confUart();
     confADC();
 
+    //setReloj(2, 8);
+
     while(1) {
-    	readkey();
+
     }
     return 0 ;
 }
