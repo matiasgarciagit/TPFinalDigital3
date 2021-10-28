@@ -16,11 +16,10 @@ uint8_t menu=0;
 
 int main(void){
 	config_GPIO();
-	//confTimers();
 	confUart();
     confADC();
     configINT();
-
+    confTimers();
 
     while(1) {
     	if(menu==0){
