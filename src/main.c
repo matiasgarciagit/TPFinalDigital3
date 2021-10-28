@@ -11,18 +11,91 @@
 #include "timer.h"
 #include "ADC.h"
 
+void SetAlarma(void);
+void SetHora(void);
+void CambiarMenu(void);
+void VerificarAlarma(void);
+void MostrarTemp(void);
+void MostrarHora(void);
+void SonarAlarma(void);
 
-int main(void) {
+
+uint8_t menu=0;
+
+int main(void){
 	config_GPIO();
 	confTimers();
 	confUart();
     confADC();
 
     while(1) {
-        consoleclear();
+    	if(menu==0){
+    		VerificarAlarma();
+    		MostrarHora();
+        /*consoleclear();
     	readkey();
     	data[0]=keypress;
     	sendData();
+    	*/
+    	}
+    	else{
+    		VerificarAlarma();
+    		MostrarTemp();
+
+    	}
     }
     return 0 ;
+}
+
+void EINT3_IRQHandler(void){
+	//Antirebote();
+	char tecla;
+	//char tecla= readkey();
+	switch(tecla){
+			case 'A':
+	            SetHora();
+	            break;
+	        case 'B':
+	            SetAlarma();
+	            break;
+	        case '<':
+	        case '>':
+	            CambiarMenu();
+	            break;
+	    }
+	LPC_GPIO2->FIOCLR |= (0b11111<<4);
+	LPC_GPIOINT->IO2IntClr |=(1<<10);
+}
+
+void SetAlarma(void){
+
+}
+void SetHora(void){
+
+}
+void CambiarMenu(void){
+	if(menu==0){
+		menu=1;
+	}
+	else{
+		menu=0;
+	}
+}
+void VerificarAlarma(void){
+	if(HoraReloj==HoraAlarma){
+		if(MinutosReloj==MinutosAlarma){
+			SonarAlarma();
+		}
+	}
+}
+void MostrarTemp(void){
+
+
+}
+void MostrarHora(void){
+
+}
+
+void SonarAlarma(void){
+
 }
