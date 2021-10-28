@@ -16,9 +16,10 @@ uint8_t menu=0;
 
 int main(void){
 	config_GPIO();
-	confTimers();
 	confUart();
-    //confADC();
+    confADC();
+    configINT();
+    confTimers();
 
 
     while(1) {
@@ -54,7 +55,7 @@ void EINT3_IRQHandler(void){
 	            break;
 	    }
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
-	LPC_GPIOINT->IO2IntClr |=(1<<10);
+	LPC_GPIOINT->IO2IntClr |=(0b1111<<0);
 }
 
 void SetAlarma(void){

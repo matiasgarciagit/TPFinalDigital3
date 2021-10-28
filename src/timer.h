@@ -47,11 +47,11 @@ void TIMER0_IRQHandler(void){
 		}
 
 	}
-	while(0 == ADC_ChannelGetStatus(LPC_ADC,ADC_CHANNEL_0, ADC_DATA_DONE)){
+	/*while(0 == ADC_ChannelGetStatus(LPC_ADC,ADC_CHANNEL_0, ADC_DATA_DONE)){
 	}
 	ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF;
 
-	Temp= (ADC0Value/4096*80)-20; // Temperatura entre -20° y 60°
+	Temp= (ADC0Value/4096*80)-20; // Temperatura entre -20° y 60°*/
 
 	LPC_TIM0->IR|= (1<<1);
 
