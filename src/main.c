@@ -16,7 +16,7 @@ uint8_t menu=0;
 
 int main(void){
 	config_GPIO();
-	confTimers();
+	//confTimers();
 	confUart();
     confADC();
 
@@ -82,7 +82,9 @@ void MostrarTemp(void){
 
 }
 void MostrarHora(void){
-
+    consoleclear();
+    setReloj(HoraReloj,MinutosReloj);
+    sendData();
 }
 
 void SonarAlarma(void){
