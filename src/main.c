@@ -11,14 +11,6 @@
 #include "timer.h"
 #include "ADC.h"
 
-void SetAlarma(void);
-void SetHora(void);
-void CambiarMenu(void);
-void VerificarAlarma(void);
-void MostrarTemp(void);
-void MostrarHora(void);
-void SonarAlarma(void);
-
 
 uint8_t menu=0;
 
@@ -28,21 +20,18 @@ int main(void){
 	confUart();
     confADC();
 
+
     while(1) {
     	if(menu==0){
     		VerificarAlarma();
     		MostrarHora();
-        /*consoleclear();
-    	readkey();
-    	data[0]=keypress;
-    	sendData();
-    	*/
     	}
     	else{
     		VerificarAlarma();
     		MostrarTemp();
 
     	}
+
     }
     return 0 ;
 }
@@ -50,7 +39,7 @@ int main(void){
 void EINT3_IRQHandler(void){
 	//Antirebote();
 	char tecla;
-	//char tecla= readkey();
+	tecla = readkey();
 	switch(tecla){
 			case 'A':
 	            SetHora();

@@ -1,5 +1,33 @@
+
+
 uint8_t clear[] = "\033[H\033[J";
-uint8_t data[] = "";
+uint8_t reloj[5];
+
+
+void setReloj(uint8_t horas, uint8_t minutos){
+	reloj[2]=':';
+	char charValue;
+	int aux;
+
+    aux=horas%10;
+    charValue=aux+'0';
+    reloj[1]=charValue;
+    horas /= 10;
+
+    aux=horas%10;
+    charValue=aux+'0';
+    reloj[0]=charValue;
+
+    aux=minutos%10;
+    charValue=aux+'0';
+    reloj[4]=charValue;
+    minutos /= 10;
+
+    aux=minutos%10;
+    charValue=aux+'0';
+    reloj[3]=charValue;
+
+}
 
 void confUart(void){
 	UART_CFG_Type UARTConfigStruct;
@@ -20,5 +48,6 @@ void consoleclear(){
 }
 
 void sendData(){
-	UART_Send(LPC_UART0, data, sizeof(data), BLOCKING);
+	UART_Send(LPC_UART0, reloj, sizeof(reloj), BLOCKING);
 }
+

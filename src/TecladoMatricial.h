@@ -10,7 +10,7 @@ char keypad[5][4]={
         };
 
 
-void readkey(){
+char readkey(){
 
     uint8_t i;
     uint8_t j;
@@ -19,13 +19,13 @@ void readkey(){
         LPC_GPIO2->FIOCLR |= (1<<i);//11101||1111)
         for(j=0;j<4;j++){
             if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
-                keypress=keypad[8-i][j];
+                return keypad[8-i][j];
             }
         }
         LPC_GPIO2->FIOSET |= (1<<i);
         retardo();
     }
-
+    return '0';
 }
 
 void retardo(void){

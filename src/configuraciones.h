@@ -5,6 +5,14 @@ uint8_t MinutosReloj;
 int16_t Temp;
 uint16_t ADC0Value;
 
+void SetAlarma(void);
+void SetHora(void);
+void CambiarMenu(void);
+void VerificarAlarma(void);
+void MostrarTemp(void);
+void MostrarHora(void);
+void SonarAlarma(void);
+
 void config_GPIO(){
 	//Teclado
     //Entradas (columnas)
@@ -39,6 +47,8 @@ void config_GPIO(){
     pin_configuration.Pinmode = 0;
     pin_configuration.Funcnum = 1;
     pin_configuration.OpenDrain = 0;
+    PINSEL_ConfigPin(&pin_configuration);
+    pin_configuration.Pinnum = 3;
     PINSEL_ConfigPin(&pin_configuration);
 
     //ADC
