@@ -20,6 +20,10 @@
 GPDMA_Channel_CFG_Type GPDMACfg;	//Estructura de configuracion del DMA
 volatile dato;
 
+void confDMA(){
+
+}
+
 int main(void)
 {
     PINSEL_CFG_Type PinCfg;
