@@ -12,7 +12,7 @@
 #include "uart.h"
 #include "timer.h"
 #include "ADC.h"
-//#include "dma.h"
+#include "dma.h"
 
 char keypress;
 uint8_t menu=0;
@@ -24,7 +24,7 @@ int main(void){
     confADC();
     configINT();
     confTimers();
-    //confDMA();
+    confDMA();
 
     while(1) {
 

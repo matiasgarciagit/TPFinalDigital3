@@ -3,7 +3,7 @@ uint8_t HoraReloj;
 uint8_t MinutosAlarma;
 uint8_t MinutosReloj;
 int16_t Temp;
-uint16_t ADC0Value;
+uint16_t ADC0Value=0;
 
 void SetAlarma(void);
 void SetHora(void);
