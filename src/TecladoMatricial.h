@@ -1,5 +1,5 @@
 void retardo();
-
+char cvalue;
 char keypress;
 char keypad[5][4]={
         {'A','B','#','*'},
@@ -27,18 +27,37 @@ char readkey(){
     }
     return 'r';
 }
+char presiona(){
+    while(1){
+        uint8_t i;
+        uint8_t j;
+        LPC_GPIO2->FIOPIN = (31<<4); //(11111||1111)
+        for(i=4;i<9;i++){
+            LPC_GPIO2->FIOCLR |= (1<<i);//11101||1111)
+            for(j=0;j<4;j++){
+                if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
+                    return keypad[8-i][j];
+                }
+            }
+            LPC_GPIO2->FIOSET |= (1<<i);
+            //retardo();
+        }
+    }
+}
+
+/*
 
 char presiona(){
 	uint8_t i=4;
 	uint8_t j;
 	uint8_t flag=0;
-	char charValue;
+
 	LPC_GPIO2->FIOPIN = (31<<4);
 	while(1){
 		LPC_GPIO2->FIOCLR |= (1<<i);
 		for(j=0;j<4;j++){
 		   if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
-		      charValue= keypad[8-i][j];
+		      cvalue= keypad[8-i][j];
 		      flag=1;
 		      break;
 		   }
@@ -47,13 +66,13 @@ char presiona(){
 			break;
 		}
 		i++;
-		if(i==9){
-			i=0;
+		if(i>=9){
+			i=4;
 		}
 	}
-	return charValue;
+	return cvalue;
 }
-
+*/
 void suelta(){
 	uint8_t i;
 	uint8_t j;

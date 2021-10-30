@@ -14,7 +14,8 @@
 
 char keypress;
 uint8_t menu=0;
-
+uint8_t hora;
+uint8_t minutos;
 int main(void){
 
 	config_GPIO();
@@ -69,17 +70,19 @@ void SetAlarma(void){
 void SetHora(void){
 	uint8_t si=1;
 	uint8_t aux=1;
-	uint8_t hora;
-	uint8_t minutos;
-	char mensaje1[]="Ingrese 2 digitos para hora entre 00-23";
-	UART_Send(LPC_UART0, mensaje1, sizeof(mensaje1), BLOCKING);
+
+
 	while(aux){
+		consoleclear();
+		char mensaje1[]="Ingrese 2 digitos para hora entre 00-23";
+		UART_Send(LPC_UART0, mensaje1, sizeof(mensaje1), BLOCKING);
 		while(si){
 				hora= (((int) presiona())-48)*10;
 				suelta();
 				hora += ((int) presiona()) -48;
 				suelta();
 				if(hora>23){
+					consoleclear();
 					char mensaje2[]="Hora incorrecta, ingrese nuevamente:";
 					UART_Send(LPC_UART0, mensaje2, sizeof(mensaje2), BLOCKING);
 				}
@@ -87,6 +90,7 @@ void SetHora(void){
 			}
 
 			si=1;
+			consoleclear();
 			char mensaje3[]="Ingrese 2 digitos para minutos entre 00-59";
 			UART_Send(LPC_UART0, mensaje3, sizeof(mensaje3), BLOCKING);
 			while(si){
@@ -95,18 +99,27 @@ void SetHora(void){
 				minutos += ((int) presiona()) -48;
 				suelta();
 				if(minutos>59){
+					consoleclear();
 					char mensaje4[]="Minutos incorrecto, ingrese nuevamente:";
 					UART_Send(LPC_UART0, mensaje4, sizeof(mensaje4), BLOCKING);
 				}
 				else si=0;
 			}
+			consoleclear();
 			char mensaje5[]="La hora ingresada es ";
 			UART_Send(LPC_UART0, mensaje5, sizeof(mensaje5), BLOCKING);
 			setReloj(hora,minutos);
 			enviarReloj(reloj);
 			char mensaje6[]=" .Si es correcta presione Enter";
 			UART_Send(LPC_UART0, mensaje6, sizeof(mensaje6), BLOCKING);
-			if(presiona() == 'E')aux=0;
+			if(presiona() == 'E'){
+				aux=0;
+				HoraReloj=hora;
+				MinutosReloj=minutos;
+
+			}
+			si=1;
+			suelta();
 	}
 
 
