@@ -32,3 +32,11 @@ void retardo(void){
     uint32_t contador;
     for(contador =0 ; contador<100000; contador++){};
 }
+
+
+char presiona(void){
+
+}
+void suelta(void){
+
+}
