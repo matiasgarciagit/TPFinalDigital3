@@ -1,26 +1,30 @@
-
+#include "F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace\CMSISv2p00_LPC17xx\inc\LPC17xx.h"
+#include "F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace\CMSISv2p00_LPC17xx\inc\core_cm3.h"
 #include "LPC17xx.h"
 #include "lpc17xx_gpio.h"
 #include "lpc17xx_pinsel.h"
 #include "lpc17xx_uart.h"
 #include "lpc17xx_timer.h"
 #include "lpc17xx_ADC.h"
+#include "lpc17xx_gpdma.h"
 #include "configuraciones.h"
 #include "TecladoMatricial.h"
 #include "uart.h"
 #include "timer.h"
 #include "ADC.h"
+//#include "dma.h"
 
-
+char keypress;
 uint8_t menu=0;
 
 int main(void){
+
 	config_GPIO();
 	confUart();
     confADC();
     configINT();
     confTimers();
-
+    //confDMA();
 
     while(1) {
 
@@ -39,9 +43,10 @@ int main(void){
 }
 
 void EINT3_IRQHandler(void){
-	//Antirebote();
+	Antirebote();
 	char tecla;
 	tecla = readkey();
+	keypress =tecla;
 	switch(tecla){
 			case 'A':
 	            SetHora();
@@ -50,6 +55,8 @@ void EINT3_IRQHandler(void){
 	            SetAlarma();
 	            break;
 	        case '<':
+	            CambiarMenu();
+	            break;
 	        case '>':
 	            CambiarMenu();
 	            break;
@@ -80,13 +87,15 @@ void VerificarAlarma(void){
 	}
 }
 void MostrarTemp(void){
-
+	consoleclear();
+	setTemperatura(Temp);
+	enviarRTemperatura();
 
 }
 void MostrarHora(void){
     consoleclear();
     setReloj(HoraReloj,MinutosReloj);
-    sendData(reloj);
+    enviarReloj(reloj);
 }
 
 void SonarAlarma(void){

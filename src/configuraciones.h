@@ -70,7 +70,7 @@ void configINT(void){
 
 void Antirebote(void){
 	uint32_t i;
-	for(i=0;i<100000;i++){};
+	for(i=0;i<1500000;i++){};
 }
 
 

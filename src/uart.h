@@ -2,7 +2,7 @@
 
 uint8_t clear[] = "\033[H\033[J";
 uint8_t reloj[5];
-
+int16_t temperatura[5];
 
 void setReloj(uint8_t horas, uint8_t minutos){
 	reloj[2]=':';
@@ -29,6 +29,31 @@ void setReloj(uint8_t horas, uint8_t minutos){
 
 }
 
+void setTemperatura(int16_t valor){
+    char charValue;
+    int aux;
+    if(valor>=0){
+            temperatura[0]=' ';
+    }
+
+    if(valor<0){
+        temperatura[0]='-';
+        valor=-valor;
+    }
+
+    aux=valor%10;
+    charValue=aux+'0';
+    temperatura[2]=charValue;
+    valor /= 10;
+
+    aux=valor%10;
+    charValue=aux+'0';
+    temperatura[1]=charValue;
+    temperatura[3]=176;
+    temperatura[4]='C';
+
+}
+
 void confUart(void){
 	UART_CFG_Type UARTConfigStruct;
 	UART_FIFO_CFG_Type UARTFIFOConfigStruct;
@@ -47,7 +72,11 @@ void consoleclear(){
 	UART_Send(LPC_UART0, clear, sizeof(clear), BLOCKING);
 }
 
-void sendData(unsigned char *data){
-	UART_Send(LPC_UART0, data, sizeof(reloj), BLOCKING);
+void enviarReloj(){
+	UART_Send(LPC_UART0, reloj, sizeof(reloj), BLOCKING);
+}
+
+void enviarRTemperatura(){
+	UART_Send(LPC_UART0, temperatura, sizeof(temperatura), BLOCKING);
 }
 

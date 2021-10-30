@@ -23,9 +23,9 @@ char readkey(){
             }
         }
         LPC_GPIO2->FIOSET |= (1<<i);
-        retardo();
+        //retardo();
     }
-    return '0';
+    return 'r';
 }
 
 void retardo(void){
