@@ -1,11 +1,12 @@
-F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
+C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
 ../src/configuraciones.h:16:6:config_GPIO	16	static
 ../src/configuraciones.h:64:6:configINT	8	static
 ../src/configuraciones.h:71:6:Antirebote	16	static
+../src/configuraciones.h:76:6:retardo10ms	16	static
 ../src/TecladoMatricial.h:13:6:readkey	16	static
 ../src/TecladoMatricial.h:30:6:presiona	16	static
-../src/TecladoMatricial.h:76:6:suelta	16	static
-../src/TecladoMatricial.h:92:6:retardo	16	static
+../src/TecladoMatricial.h:84:6:suelta	16	static
+../src/TecladoMatricial.h:100:6:retardo	16	static
 ../src/uart.h:7:6:setReloj	24	static
 ../src/uart.h:32:6:setTemperatura	24	static
 ../src/uart.h:57:6:confUart	24	static

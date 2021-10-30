@@ -28,6 +28,7 @@ char readkey(){
     return 'r';
 }
 char presiona(){
+	uint8_t cont=0;
     while(1){
         uint8_t i;
         uint8_t j;
@@ -36,12 +37,19 @@ char presiona(){
             LPC_GPIO2->FIOCLR |= (1<<i);//11101||1111)
             for(j=0;j<4;j++){
                 if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
-                    return keypad[8-i][j];
+                	cont++;
+					if(cont==3){
+						return keypad[8-i][j];
+					}
+					i=4;
+					j=0;
+					retardo10ms();
                 }
             }
             LPC_GPIO2->FIOSET |= (1<<i);
             //retardo();
         }
+       cont=0;
     }
 }
 

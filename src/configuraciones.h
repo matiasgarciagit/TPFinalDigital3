@@ -73,4 +73,9 @@ void Antirebote(void){
 	for(i=0;i<1500000;i++){};
 }
 
+void retardo10ms(void){
+	uint32_t i;
+	for(i=0;i<500000;i++){};
+}
+
 
