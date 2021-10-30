@@ -12,7 +12,7 @@ void confTimers(void){
     struct_match.ResetOnMatch		=	ENABLE;
     struct_match.StopOnMatch		=	DISABLE;
     struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_TOGGLE;
-    struct_match.MatchValue			=	59;
+    struct_match.MatchValue			=	1;
 
     TIM_Init(LPC_TIM0, TIM_TIMER_MODE, &struct_config);
     TIM_ConfigMatch(LPC_TIM0, &struct_match);
