@@ -64,7 +64,7 @@ void EINT3_IRQHandler(void){
 	        	if(!(led==0)){
 				TIM_Cmd(LPC_TIM1, DISABLE);
 				led=0;
-				LPC_TIM1->EMR |= (1<<0);
+				LPC_TIM1->EMR &= ~(1);
 	        	}
 				break;
 	    }

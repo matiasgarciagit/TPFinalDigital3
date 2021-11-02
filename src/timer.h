@@ -59,7 +59,7 @@ void TIMER1_IRQHandler(void){
 	if(led==30){
 		TIM_Cmd(LPC_TIM1, DISABLE);
 		led=0;
-		LPC_TIM1->EMR |= (1<<0);
+		LPC_TIM1->EMR &= ~(1);
 	}
 	LPC_TIM1->IR|= (1);
 }
