@@ -15,14 +15,15 @@ void confADC(void){
 void ADC_IRQHandler(void)
 {
 
-ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF; //Variable auxiliar para observar el valor del registro de captura
+	ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF; //Variable auxiliar para observar el valor del registro de captura
+	Temp= (ADC0Value/4096*80)-20;
 
-if (ADC0Value<2054){
-LPC_GPIO0->FIOSET = (1<<22);
-}
-else{
-LPC_GPIO0->FIOCLR = (1<<22);
-}
+	if (ADC0Value<2054){
+		LPC_GPIO0->FIOSET = (1<<22);
+	}
+	else{
+		LPC_GPIO0->FIOCLR = (1<<22);
+	}
 
-return;
+	return;
 }

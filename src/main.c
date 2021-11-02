@@ -144,11 +144,11 @@ void VerificarAlarma(void){
 	}
 }
 void MostrarTemp(void){
-	while((LPC_ADC->ADDR0)&(1<<31)){
+	/*while((LPC_ADC->ADDR0)&(1<<31)){
 		ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF;
 		Temp= (ADC0Value/4096*80)-20;
 		}
-		 // Temperatura entre -20° y 60°
+		 // Temperatura entre -20° y 60°*/
 	consoleclear();
 	setTemperatura(Temp);
 	enviarRTemperatura();

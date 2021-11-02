@@ -7,7 +7,7 @@ void confDMA(){
 
     GPDMACfg.ChannelNum = 0;	//Canal 0
     GPDMACfg.SrcMemAddr = 0;	//Origen
-    GPDMACfg.DstMemAddr = ADC0Value;	//Destino = es un periferico, no es memoria
+    GPDMACfg.DstMemAddr = &ADCdma;	//Destino = es un periferico, no es memoria
     GPDMACfg.TransferSize = DMA_SIZE;	//Tamaño de la transferencia
     GPDMACfg.TransferWidth = 0;	//No usado
     GPDMACfg.TransferType = GPDMA_TRANSFERTYPE_P2M;
