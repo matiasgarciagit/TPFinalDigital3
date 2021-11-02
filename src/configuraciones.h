@@ -2,6 +2,7 @@ uint8_t HoraAlarma;
 uint8_t HoraReloj;
 uint8_t MinutosAlarma;
 uint8_t MinutosReloj;
+uint8_t alarma=0;
 int16_t Temp;
 uint16_t ADC0Value=0;
 
