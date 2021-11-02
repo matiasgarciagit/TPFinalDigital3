@@ -1,8 +1,7 @@
 void retardo();
 char cvalue;
 char keypress;
-uint8_t k;
-        uint8_t m;
+
 char keypad[5][4]={
         {'A','B','#','*'},
         {'1','2','3','m'},
@@ -11,7 +10,7 @@ char keypad[5][4]={
         {'<','0','>','E'}
         };
 
-
+/*
 char readkey(){
 
     uint8_t i;
@@ -29,63 +28,78 @@ char readkey(){
     }
     return 'r';
 }
+
+*/
+
+
 char presiona(){
 	uint8_t cont=0;
+	uint8_t i;
+	uint8_t j;
     while(1){
 
         LPC_GPIO2->FIOPIN = (31<<4); //(11111||1111)
-        for(k=4;k<9;k++){
-            LPC_GPIO2->FIOCLR |= (1<<k);//11101||1111)
-            for(m=0;m<4;m++){
-                if(!((LPC_GPIO2->FIOPIN)&(1<<m))){
+        for(i=4;i<9;i++){
+            LPC_GPIO2->FIOCLR |= (1<<i);//11110||1111)
+            for(j=0;j<4;j++){
+                if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
                 	cont++;
 					if(cont==3){
-						keypress=keypad[8-k][m];
-						return keypad[8-k][m];
+						keypress=keypad[8-i][j];
+						return keypad[8-i][j];
 
 					}
-					LPC_GPIO2->FIOSET |= (1<<k);
-					k=4;
-					m=0;
+					LPC_GPIO2->FIOSET |= (1<<i);
+					i=4;
+					j=0;
+					LPC_GPIO2->FIOCLR |= (1<<i);
 					retardo10ms();
                 }
 
             }
-            LPC_GPIO2->FIOSET |= (1<<k);
-            //retardo();
+            LPC_GPIO2->FIOSET |= (1<<i);
+
         }
        cont=0;
     }
 }
 
-/*
 
-char presiona(){
-	uint8_t i=4;
+char readkey(){
+	uint8_t cont=0;
+	uint8_t aux=20;
+	uint8_t i;
 	uint8_t j;
-	uint8_t flag=0;
+    while(aux){
 
-	LPC_GPIO2->FIOPIN = (31<<4);
-	while(1){
-		LPC_GPIO2->FIOCLR |= (1<<i);
-		for(j=0;j<4;j++){
-		   if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
-		      cvalue= keypad[8-i][j];
-		      flag=1;
-		      break;
-		   }
-		}
-		if(flag==1){
-			break;
-		}
-		i++;
-		if(i>=9){
-			i=4;
-		}
-	}
-	return cvalue;
+        LPC_GPIO2->FIOPIN = (31<<4); //(11111||1111)
+        for(i=4;i<9;i++){
+            LPC_GPIO2->FIOCLR |= (1<<i);//11110||1111)
+            for(j=0;j<4;j++){
+                if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
+                	cont++;
+					if(cont==3){
+						keypress=keypad[8-i][j];
+						return keypad[8-i][j];
+
+					}
+					LPC_GPIO2->FIOSET |= (1<<i);
+					i=4;
+					j=0;
+					LPC_GPIO2->FIOCLR |= (1<<i);
+					retardo10ms();
+                }
+
+            }
+            LPC_GPIO2->FIOSET |= (1<<i);
+            
+        }
+       cont=0;
+       aux--;
+    }
+    return 'r';
 }
-*/
+
 void suelta(){
 	uint8_t i;
 	uint8_t j;

@@ -42,10 +42,11 @@ int main(void){
 }
 
 void EINT3_IRQHandler(void){
-	Antirebote();
+	//Antirebote();
+
 	char tecla;
 	tecla = readkey();
-	keypress =tecla;
+
 	switch(tecla){
 			case 'A':
 	            SetHora();
@@ -68,6 +69,7 @@ void SetAlarma(void){
 
 }
 void SetHora(void){
+	suelta();
 	uint8_t si=1;
 	uint8_t aux=1;
 
