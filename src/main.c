@@ -69,7 +69,8 @@ void SetAlarma(void){
 	suelta();
 	uint8_t si=1;
 	uint8_t aux=1;
-	char mensaje11[]="- Para configurar Alarma presione Enter \n";
+	consoleclear();
+	char mensaje11[]="- Para configurar Alarma presione Enter \n \r";
 	UART_Send(LPC_UART0, mensaje11, sizeof(mensaje11), BLOCKING);
 	char mensaje12[]="- Para Desactivar Alarma presione Escape \n";
 	UART_Send(LPC_UART0, mensaje12, sizeof(mensaje12), BLOCKING);
@@ -80,6 +81,7 @@ void SetAlarma(void){
 		return;
 
 	case 'E':
+		suelta();
 		while(aux){
 			consoleclear();
 			char mensaje1[]="Ingrese 2 digitos para Alarma entre 00-23";

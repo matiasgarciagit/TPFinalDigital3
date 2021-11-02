@@ -1,4 +1,4 @@
-C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
+F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
 ../src/configuraciones.h:17:6:config_GPIO	16	static
 ../src/configuraciones.h:65:6:configINT	8	static
 ../src/configuraciones.h:72:6:Antirebote	16	static
@@ -19,10 +19,10 @@ C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_
 ../src/dma.h:3:6:confDMA	48	static
 ../src/main.c:19:5:main	8	static
 ../src/main.c:44:6:EINT3_IRQHandler	16	static
-../src/main.c:68:6:SetAlarma	256	static
-../src/main.c:136:6:SetHora	168	static
-../src/main.c:197:6:CambiarMenu	4	static
-../src/main.c:205:6:VerificarAlarma	8	static
-../src/main.c:215:6:MostrarTemp	8	static
-../src/main.c:226:6:MostrarHora	8	static
-../src/main.c:232:6:SonarAlarma	4	static
+../src/main.c:68:6:SetAlarma	264	static
+../src/main.c:138:6:SetHora	168	static
+../src/main.c:199:6:CambiarMenu	4	static
+../src/main.c:207:6:VerificarAlarma	8	static
+../src/main.c:217:6:MostrarTemp	8	static
+../src/main.c:228:6:MostrarHora	8	static
+../src/main.c:234:6:SonarAlarma	4	static
