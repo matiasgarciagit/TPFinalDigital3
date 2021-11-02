@@ -3,10 +3,10 @@ F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMS
 ../src/configuraciones.h:64:6:configINT	8	static
 ../src/configuraciones.h:71:6:Antirebote	16	static
 ../src/configuraciones.h:76:6:retardo10ms	16	static
-../src/TecladoMatricial.h:35:6:presiona	16	static
-../src/TecladoMatricial.h:68:6:readkey	16	static
-../src/TecladoMatricial.h:103:6:suelta	16	static
-../src/TecladoMatricial.h:119:6:retardo	16	static
+../src/TecladoMatricial.h:14:6:presiona	16	static
+../src/TecladoMatricial.h:47:6:readkey	16	static
+../src/TecladoMatricial.h:82:6:suelta	16	static
+../src/TecladoMatricial.h:98:6:retardo	16	static
 ../src/uart.h:7:6:setReloj	24	static
 ../src/uart.h:32:6:setTemperatura	24	static
 ../src/uart.h:57:6:confUart	24	static
