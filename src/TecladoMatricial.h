@@ -1,6 +1,8 @@
 void retardo();
 char cvalue;
 char keypress;
+uint8_t k;
+        uint8_t m;
 char keypad[5][4]={
         {'A','B','#','*'},
         {'1','2','3','m'},
@@ -30,23 +32,26 @@ char readkey(){
 char presiona(){
 	uint8_t cont=0;
     while(1){
-        uint8_t i;
-        uint8_t j;
+
         LPC_GPIO2->FIOPIN = (31<<4); //(11111||1111)
-        for(i=4;i<9;i++){
-            LPC_GPIO2->FIOCLR |= (1<<i);//11101||1111)
-            for(j=0;j<4;j++){
-                if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
+        for(k=4;k<9;k++){
+            LPC_GPIO2->FIOCLR |= (1<<k);//11101||1111)
+            for(m=0;m<4;m++){
+                if(!((LPC_GPIO2->FIOPIN)&(1<<m))){
                 	cont++;
 					if(cont==3){
-						return keypad[8-i][j];
+						keypress=keypad[8-k][m];
+						return keypad[8-k][m];
+
 					}
-					i=4;
-					j=0;
+					LPC_GPIO2->FIOSET |= (1<<k);
+					k=4;
+					m=0;
 					retardo10ms();
                 }
+
             }
-            LPC_GPIO2->FIOSET |= (1<<i);
+            LPC_GPIO2->FIOSET |= (1<<k);
             //retardo();
         }
        cont=0;
