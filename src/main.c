@@ -60,6 +60,13 @@ void EINT3_IRQHandler(void){
 	        case '>':
 	            CambiarMenu();
 	            break;
+	        case 'F':
+	        	if(!(led==0)){
+				TIM_Cmd(LPC_TIM1, DISABLE);
+				led=0;
+				LPC_TIM1->EMR &= ~(1);
+	        	}
+				break;
 	    }
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
 	LPC_GPIOINT->IO2IntClr |=(0b1111<<0);
@@ -232,5 +239,6 @@ void MostrarHora(void){
 }
 
 void SonarAlarma(void){
-
+	TIM_Cmd(LPC_TIM1, ENABLE);
+	led =1;
 }
