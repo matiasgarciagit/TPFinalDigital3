@@ -12,7 +12,7 @@ void confTimers(void){
     struct_match.ResetOnMatch		=	ENABLE;
     struct_match.StopOnMatch		=	DISABLE;
     struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_TOGGLE;
-    struct_match.MatchValue			=	10;
+    struct_match.MatchValue			=	2;
 
     TIM_Init(LPC_TIM0, TIM_TIMER_MODE, &struct_config);
     TIM_ConfigMatch(LPC_TIM0, &struct_match);
@@ -27,7 +27,7 @@ void confTimers(void){
     struct_match.IntOnMatch			=	ENABLE;
     struct_match.ResetOnMatch		=	ENABLE;
     struct_match.StopOnMatch		=	DISABLE;
-    struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_NOTHING;
+    struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_TOGGLE;
     struct_match.MatchValue			=	1;
 
     TIM_Init(LPC_TIM1, TIM_TIMER_MODE, &struct_config);
@@ -61,5 +61,6 @@ void TIMER1_IRQHandler(void){
 		led=0;
 		LPC_GPIO1->FIOCLR |= (1<<22);
 	}
+	LPC_TIM1->IR|= (1);
 }
 
