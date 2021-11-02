@@ -26,14 +26,13 @@ int main(void){
     confDMA();
 
     while(1) {
-
-    	if(menu==0){
+		if(menu==0){
     		VerificarAlarma();
-    		MostrarHora();
+    		if(mostrar==1)MostrarHora();
     	}
     	else{
     		VerificarAlarma();
-    		MostrarTemp();
+    		if(mostrar==1)MostrarTemp();
 
     	}
 
