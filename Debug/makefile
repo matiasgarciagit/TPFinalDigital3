@@ -29,7 +29,7 @@ all: TPFinalDigital3.axf
 TPFinalDigital3.axf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Linker'
-	arm-none-eabi-gcc -nostdlib -L"F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\Debug" -Xlinker -Map="TPFinalDigital3.map" -Xlinker --cref -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "TPFinalDigital3_Debug.ld" -o "TPFinalDigital3.axf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -nostdlib -L"C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_LPC17xx\Debug" -Xlinker -Map="TPFinalDigital3.map" -Xlinker --cref -Xlinker --gc-sections -Xlinker -print-memory-usage -mcpu=cortex-m3 -mthumb -T "TPFinalDigital3_Debug.ld" -o "TPFinalDigital3.axf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build

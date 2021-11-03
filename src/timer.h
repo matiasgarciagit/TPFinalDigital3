@@ -35,6 +35,11 @@ void confTimers(void){
 	//TIM_Cmd(LPC_TIM1, ENABLE);
     NVIC_EnableIRQ(TIMER1_IRQn);
 
+
+    // Prioridades
+    NVIC_SetPriority(TIMER1_IRQn, 2);
+    NVIC_SetPriority(TIMER0_IRQn, 1);
+
 }
 
 void TIMER0_IRQHandler(void){
@@ -47,8 +52,7 @@ void TIMER0_IRQHandler(void){
 		}
 
 	}
-
-
+	mostrar=1;
 	LPC_TIM0->IR|= (1<<1);
 
 

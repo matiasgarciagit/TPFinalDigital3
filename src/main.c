@@ -26,14 +26,13 @@ int main(void){
     confDMA();
 
     while(1) {
-
-    	if(menu==0){
+		if(menu==0){
     		VerificarAlarma();
-    		MostrarHora();
+    		if(mostrar==1)MostrarHora();
     	}
     	else{
     		VerificarAlarma();
-    		MostrarTemp();
+    		if(mostrar==1)MostrarTemp();
 
     	}
 
@@ -43,7 +42,7 @@ int main(void){
 
 void EINT3_IRQHandler(void){
 	//Antirebote();
-
+	mostrar=1;
 	char tecla;
 	tecla = readkey();
 
@@ -141,6 +140,7 @@ void SetAlarma(void){
 			}
 		}
 
+
 }
 void SetHora(void){
 	TIM_Cmd(LPC_TIM0, DISABLE);
@@ -200,8 +200,6 @@ void SetHora(void){
 	}
 
 
-
-
 }
 void CambiarMenu(void){
 	if(menu==0){
@@ -210,6 +208,7 @@ void CambiarMenu(void){
 	else{
 		menu=0;
 	}
+	mostrar=1;
 }
 void VerificarAlarma(void){
 	if(alarma==1){
@@ -230,12 +229,14 @@ void MostrarTemp(void){
 	consoleclear();
 	setTemperatura(Temp);
 	enviarRTemperatura();
+	mostrar=0;
 
 }
 void MostrarHora(void){
     consoleclear();
     setReloj(HoraReloj,MinutosReloj);
     enviarReloj(reloj);
+    mostrar=0;
 }
 
 void SonarAlarma(void){
