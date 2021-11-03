@@ -3,8 +3,9 @@ uint8_t HoraReloj;
 uint8_t MinutosAlarma;
 uint8_t MinutosReloj;
 uint8_t alarma=0;
+uint8_t led=0;
+uint8_t mostrar=1;
 int16_t Temp;
-uint16_t ADC0Value=0;
 
 
 void SetAlarma(void);
@@ -61,6 +62,14 @@ void config_GPIO(){
     pin_configuration.OpenDrain = 0;
     PINSEL_ConfigPin(&pin_configuration);
 
+    //TIMER
+	pin_configuration.Portnum = 1;
+	pin_configuration.Pinnum = 22;
+	pin_configuration.Pinmode = PINSEL_PINMODE_TRISTATE;
+	pin_configuration.Funcnum = 3;
+	pin_configuration.OpenDrain = 0;
+	PINSEL_ConfigPin(&pin_configuration);
+
 }
 
 void configINT(void){
@@ -68,6 +77,7 @@ void configINT(void){
 	LPC_GPIOINT->IO2IntClr |= (0b1111<<0);
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
 	NVIC_EnableIRQ(EINT3_IRQn);
+	NVIC_SetPriority(EINT3_IRQn, 3);
 }
 
 void Antirebote(void){

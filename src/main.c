@@ -20,8 +20,8 @@ int main(void){
 
 	config_GPIO();
 	confUart();
-	confDMA();
     confADC();
+	confDMA();
     configINT();
     confTimers();
 
@@ -30,23 +30,24 @@ int main(void){
 
     while(1) {
 
-    	if(menu==0){
+		if(menu==0){
     		VerificarAlarma();
-    		MostrarHora();
+    		if(mostrar==1)MostrarHora();
     	}
     	else{
     		VerificarAlarma();
-    		MostrarTemp();
+    		if(mostrar==1)MostrarTemp();
 
     	}
 
     }
+
     return 0 ;
 }
 
 void EINT3_IRQHandler(void){
 	//Antirebote();
-
+	mostrar=1;
 	char tecla;
 	tecla = readkey();
 
@@ -63,6 +64,13 @@ void EINT3_IRQHandler(void){
 	        case '>':
 	            CambiarMenu();
 	            break;
+	        case 'F':
+	        	if(!(led==0)){
+				TIM_Cmd(LPC_TIM1, DISABLE);
+				led=0;
+				LPC_TIM1->EMR &= ~(1);
+	        	}
+				break;
 	    }
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
 	LPC_GPIOINT->IO2IntClr |=(0b1111<<0);
@@ -137,6 +145,7 @@ void SetAlarma(void){
 			}
 		}
 
+
 }
 void SetHora(void){
 	TIM_Cmd(LPC_TIM0, DISABLE);
@@ -196,8 +205,6 @@ void SetHora(void){
 	}
 
 
-
-
 }
 void CambiarMenu(void){
 	if(menu==0){
@@ -206,6 +213,7 @@ void CambiarMenu(void){
 	else{
 		menu=0;
 	}
+	mostrar=1;
 }
 void VerificarAlarma(void){
 	if(alarma==1){
@@ -226,14 +234,17 @@ void MostrarTemp(void){
 	consoleclear();
 	setTemperatura(Temp);
 	enviarRTemperatura();
+	mostrar=0;
 
 }
 void MostrarHora(void){
     consoleclear();
     setReloj(HoraReloj,MinutosReloj);
     enviarReloj(reloj);
+    mostrar=0;
 }
 
 void SonarAlarma(void){
-
+	TIM_Cmd(LPC_TIM1, ENABLE);
+	led =1;
 }

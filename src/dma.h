@@ -1,22 +1,83 @@
-#define DMA_SIZE		16
-uint16_t ADCdma=0;
+
+uint16_t ADC0Value=0;
+#define DMA_SIZE		1
+uint32_t ADCdma=0, tmp;
+
+/* Terminal Counter flag for Channel 0 */
+__IO uint32_t Channel0_TC;
+
+/* Error Counter flag for Channel 0 */
+__IO uint32_t Channel0_Err;
+
+GPDMA_Channel_CFG_Type GPDMACfg;
+
+void DMA_IRQHandler (void)
+{
+	// check GPDMA interrupt on channel 0
+	if (GPDMA_IntGetStatus(GPDMA_STAT_INT, 0)){
+		// Check counter terminal status
+		if(GPDMA_IntGetStatus(GPDMA_STAT_INTTC, 0)){
+			// Clear terminate counter Interrupt pending
+			GPDMA_ClearIntPending (GPDMA_STATCLR_INTTC, 0);
+				Channel0_TC++;
+		}
+		// Check error terminal status
+		if (GPDMA_IntGetStatus(GPDMA_STAT_INTERR, 0)){
+			// Clear error counter Interrupt pending
+			GPDMA_ClearIntPending (GPDMA_STATCLR_INTERR, 0);
+			Channel0_Err++;
+		}
+	}
+}
 
 void confDMA(){
 
-    GPDMA_Channel_CFG_Type GPDMACfg;	//Estructura de configuracion del DMA
+	/* GPDMA block section -------------------------------------------- */
+		/* Disable GPDMA interrupt */
+	NVIC_DisableIRQ(DMA_IRQn);
+	/* preemption = 1, sub-priority = 1 */
+	NVIC_SetPriority(DMA_IRQn, ((0x01<<3)|0x01));
+
+	/* Initialize GPDMA controller */
+
+	//Estructura de configuracion del DMA
     GPDMA_Init();	//Inicializa el modulo DMA
 
     GPDMACfg.ChannelNum = 0;	//Canal 0
     GPDMACfg.SrcMemAddr = 0;	//Origen
-    GPDMACfg.DstMemAddr = ADCdma;
+    GPDMACfg.DstMemAddr = (uint32_t) &ADCdma;
     GPDMACfg.TransferSize = DMA_SIZE;	//Tamaño de la transferencia
-    GPDMACfg.TransferWidth = 1;	//No usado
+    GPDMACfg.TransferWidth = 0;	//No usado
     GPDMACfg.TransferType = GPDMA_TRANSFERTYPE_P2M;
     GPDMACfg.SrcConn = GPDMA_CONN_ADC;	//La fuente es memoria => no connection
     GPDMACfg.DstConn = 0;	//Destino : conexión al ADC
     GPDMACfg.DMALLI = 0;	//Lista de enlace del DMA
     GPDMA_Setup(&GPDMACfg);
-    GPDMA_ChannelCmd(0, ENABLE);	//Enciende el modulo DMA
+    /* Reset terminal counter */
+    Channel0_TC = 0;
+    /* Reset Error counter */
+    Channel0_Err = 0;
+    /* Enable GPDMA interrupt */
+    NVIC_EnableIRQ(DMA_IRQn);
 
 }
+
+void transmitirDMA(){
+	GPDMA_ChannelCmd(0, ENABLE);
+	ADC_StartCmd(LPC_ADC,ADC_START_NOW);
+	/* Wait for GPDMA processing complete */;
+	while ((Channel0_TC == 0) );
+	// Disable GPDMA channel 0
+	GPDMA_ChannelCmd(0, DISABLE);
+	// Wait for a while
+	for(tmp = 0; tmp < 1000000; tmp++);
+	/* GPDMA Re-setup */
+	GPDMA_Setup(&GPDMACfg);
+	/* Reset terminal counter */
+	Channel0_TC = 0;
+	/* Reset Error counter */
+	Channel0_Err = 0;
+
+}
+
 

@@ -1,8 +1,10 @@
 F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
-../src/configuraciones.h:18:6:config_GPIO	16	static
-../src/configuraciones.h:66:6:configINT	8	static
-../src/configuraciones.h:73:6:Antirebote	16	static
-../src/configuraciones.h:78:6:retardo10ms	16	static
+F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:941:22:NVIC_DisableIRQ	16	static
+F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:1012:22:NVIC_SetPriority	16	static
+../src/configuraciones.h:19:6:config_GPIO	16	static
+../src/configuraciones.h:75:6:configINT	8	static
+../src/configuraciones.h:83:6:Antirebote	16	static
+../src/configuraciones.h:88:6:retardo10ms	16	static
 ../src/TecladoMatricial.h:14:6:presiona	16	static
 ../src/TecladoMatricial.h:48:6:readkey	16	static
 ../src/TecladoMatricial.h:83:6:suelta	16	static
@@ -14,15 +16,18 @@ F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMS
 ../src/uart.h:75:6:enviarReloj	8	static
 ../src/uart.h:79:6:enviarRTemperatura	8	static
 ../src/timer.h:2:6:confTimers	32	static
-../src/timer.h:40:6:TIMER0_IRQHandler	4	static
-../src/ADC.h:3:6:confADC	8	static
-../src/dma.h:3:6:confDMA	48	static
+../src/timer.h:45:6:TIMER0_IRQHandler	4	static
+../src/timer.h:61:6:TIMER1_IRQHandler	8	static
+../src/ADC.h:2:6:confADC	8	static
+../src/dma.h:14:6:DMA_IRQHandler	8	static
+../src/dma.h:33:6:confDMA	8	static
+../src/dma.h:65:6:transmitirDMA	8	static
 ../src/main.c:19:5:main	8	static
-../src/main.c:47:6:EINT3_IRQHandler	16	static
-../src/main.c:71:6:SetAlarma	264	static
-../src/main.c:141:6:SetHora	168	static
-../src/main.c:202:6:CambiarMenu	4	static
-../src/main.c:210:6:VerificarAlarma	8	static
-../src/main.c:220:6:MostrarTemp	8	static
-../src/main.c:231:6:MostrarHora	8	static
-../src/main.c:237:6:SonarAlarma	4	static
+../src/main.c:48:6:EINT3_IRQHandler	16	static
+../src/main.c:79:6:SetAlarma	264	static
+../src/main.c:150:6:SetHora	168	static
+../src/main.c:209:6:CambiarMenu	4	static
+../src/main.c:218:6:VerificarAlarma	8	static
+../src/main.c:228:6:MostrarTemp	8	static
+../src/main.c:240:6:MostrarHora	8	static
+../src/main.c:247:6:SonarAlarma	8	static
