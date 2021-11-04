@@ -36,6 +36,23 @@ void confTimers(void){
     NVIC_EnableIRQ(TIMER1_IRQn);
 
 
+    //TIMER2 M0 X mSegundos
+	struct_config.PrescaleOption	=	TIM_PRESCALE_USVAL;
+	struct_config.PrescaleValue		=	500;
+
+	struct_match.MatchChannel		=	0;
+	struct_match.IntOnMatch			=	ENABLE;
+	struct_match.ResetOnMatch		=	ENABLE;
+	struct_match.StopOnMatch		=	ENABLE;
+	struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_NOTHING;
+	struct_match.MatchValue			=	9; // X [mS]= (MV + 1)*TIMuS
+
+	TIM_Init(LPC_TIM2, TIM_TIMER_MODE, &struct_config);
+	TIM_ConfigMatch(LPC_TIM2, &struct_match);
+	//TIM_Cmd(LPC_TIM1, ENABLE);
+	NVIC_EnableIRQ(TIMER2_IRQn);
+
+
     // Prioridades
     NVIC_SetPriority(TIMER1_IRQn, 1);
     NVIC_SetPriority(TIMER0_IRQn, 0);
@@ -66,5 +83,10 @@ void TIMER1_IRQHandler(void){
 		LPC_TIM1->EMR &= ~(1);
 	}
 	LPC_TIM1->IR|= (1);
+}
+
+void TIMER2_IRQHandler(void){
+	auxretardo=0;
+	LPC_TIM2->IR|= (1);
 }
 

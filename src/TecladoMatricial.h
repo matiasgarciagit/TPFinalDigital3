@@ -23,7 +23,7 @@ char presiona(){
             for(j=0;j<4;j++){
                 if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
                 	cont++;
-					if(cont==3){
+					if(cont==5){
 						keypress=keypad[8-i][j];
 						return keypad[8-i][j];
 
@@ -32,7 +32,7 @@ char presiona(){
 					i=4;
 					j=-1;
 					LPC_GPIO2->FIOCLR |= (1<<i);
-					retardo10ms();
+					retardoms();
                 }
 
             }
@@ -58,7 +58,7 @@ char readkey(){
             for(j=0;j<4;j++){
                 if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
                 	cont++;
-					if(cont==3){
+					if(cont==5){
 						keypress=keypad[8-i][j];
 						return keypad[8-i][j];
 
@@ -67,7 +67,7 @@ char readkey(){
 					i=4;
 					j=-1;
 					LPC_GPIO2->FIOCLR |= (1<<i);
-					retardo10ms();
+					retardoms();
                 }
 
             }
@@ -96,8 +96,4 @@ void suelta(){
 	}
 }
 
-void retardo(void){
-    uint32_t contador;
-    for(contador =0 ; contador<100000; contador++){};
-}
 
