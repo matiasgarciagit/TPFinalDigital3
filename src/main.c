@@ -28,11 +28,15 @@ int main(void){
     while(1) {
 		if(menu==0){
     		VerificarAlarma();
-    		MostrarHora();
+    		if(mostrar==1){
+    			MostrarHora();
+    		}
     	}
     	else{
     		VerificarAlarma();
-    		MostrarTemp();
+    		if(mostrar==1){
+    			MostrarTemp();
+    		}
 
     	}
 
@@ -42,7 +46,7 @@ int main(void){
 
 void EINT3_IRQHandler(void){
 	//Antirebote();
-	//mostrar=1;
+	mostrar=1;
 	char tecla;
 	tecla = readkey();
 
@@ -229,14 +233,14 @@ void MostrarTemp(void){
 	consoleclear();
 	setTemperatura(Temp);
 	enviarRTemperatura();
-	//mostrar=0;
+	mostrar=0;
 
 }
 void MostrarHora(void){
     consoleclear();
     setReloj(HoraReloj,MinutosReloj);
     enviarReloj(reloj);
-    //mostrar=0;
+    mostrar=0;
 }
 
 void SonarAlarma(void){

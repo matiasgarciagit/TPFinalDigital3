@@ -5,14 +5,14 @@ void confTimers(void){
     TIM_MATCHCFG_Type	struct_match;
 
     struct_config.PrescaleOption	=	TIM_PRESCALE_USVAL;
-    struct_config.PrescaleValue		=	1000000;
+    struct_config.PrescaleValue		=	500000;
 
     struct_match.MatchChannel		=	1;
     struct_match.IntOnMatch			=	ENABLE;
     struct_match.ResetOnMatch		=	ENABLE;
     struct_match.StopOnMatch		=	DISABLE;
     struct_match.ExtMatchOutputType	=	TIM_EXTMATCH_TOGGLE;
-    struct_match.MatchValue			=	2;
+    struct_match.MatchValue			=	1; //119 para 1min
 
     TIM_Init(LPC_TIM0, TIM_TIMER_MODE, &struct_config);
     TIM_ConfigMatch(LPC_TIM0, &struct_match);
@@ -21,7 +21,7 @@ void confTimers(void){
 
     //TIMER1 M0 25u Segundos
     struct_config.PrescaleOption	=	TIM_PRESCALE_USVAL;
-    struct_config.PrescaleValue		=	250000;
+    struct_config.PrescaleValue		=	50000;
 
     struct_match.MatchChannel		=	0;
     struct_match.IntOnMatch			=	ENABLE;
@@ -43,6 +43,7 @@ void confTimers(void){
 }
 
 void TIMER0_IRQHandler(void){
+	mostrar=1;
 	MinutosReloj++;
 	if(MinutosReloj == 60){
 		MinutosReloj = 0;
@@ -52,7 +53,6 @@ void TIMER0_IRQHandler(void){
 		}
 
 	}
-	//mostrar=1;
 	LPC_TIM0->IR|= (1<<1);
 
 
