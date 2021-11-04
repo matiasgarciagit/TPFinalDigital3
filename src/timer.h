@@ -19,7 +19,7 @@ void confTimers(void){
     TIM_Cmd(LPC_TIM0, ENABLE);
     NVIC_EnableIRQ(TIMER0_IRQn);
 
-    //TIMER1 M0 25u Segundos
+    //TIMER1 M0 100m Segundos
     struct_config.PrescaleOption	=	TIM_PRESCALE_USVAL;
     struct_config.PrescaleValue		=	50000;
 
@@ -60,7 +60,7 @@ void TIMER0_IRQHandler(void){
 
 void TIMER1_IRQHandler(void){
 	led++;
-	if(led==30){
+	if(led==150){
 		TIM_Cmd(LPC_TIM1, DISABLE);
 		led=0;
 		LPC_TIM1->EMR &= ~(1);

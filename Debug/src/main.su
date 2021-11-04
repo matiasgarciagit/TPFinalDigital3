@@ -1,5 +1,5 @@
-C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
-C:\Users\lucho\Documents\MCUXpressoIDE_11.4.0_6237\workspace_drivers\CMSISv2p00_LPC17xx\inc/core_cm3.h:1012:22:NVIC_SetPriority	16	static
+F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
+F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:1012:22:NVIC_SetPriority	16	static
 ../src/configuraciones.h:19:6:config_GPIO	16	static
 ../src/configuraciones.h:75:6:configINT	8	static
 ../src/configuraciones.h:83:6:Antirebote	16	static
