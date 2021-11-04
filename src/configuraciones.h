@@ -6,7 +6,7 @@ uint8_t alarma=0;
 uint8_t led=0;
 uint8_t mostrar=1;
 int16_t Temp;
-uint16_t ADC0Value=0;
+uint16_t temperaturaDMA;
 
 void SetAlarma(void);
 void SetHora(void);

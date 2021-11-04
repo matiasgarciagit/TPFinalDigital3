@@ -43,6 +43,7 @@ void confTimers(void){
 }
 
 void TIMER0_IRQHandler(void){
+
 	mostrar=1;
 	MinutosReloj++;
 	if(MinutosReloj == 60){
@@ -53,6 +54,7 @@ void TIMER0_IRQHandler(void){
 		}
 
 	}
+	//transmitirDMA();
 	LPC_TIM0->IR|= (1<<1);
 
 

@@ -26,6 +26,7 @@ int main(void){
     confDMA();
 
     while(1) {
+
 		if(menu==0){
     		VerificarAlarma();
     		if(mostrar==1){
@@ -225,11 +226,8 @@ void VerificarAlarma(void){
 
 }
 void MostrarTemp(void){
-	while((LPC_ADC->ADDR0)&(1<<31)){
-		ADC0Value = ((LPC_ADC->ADDR0)>>4) & 0xFFF;
-		Temp= (ADC0Value/4096*80)-20;
-		}
-		 // Temperatura entre -20° y 60°
+	transmitirDMA();
+	Temp = (temperaturaDMA*80/4096)-20;
 	consoleclear();
 	setTemperatura(Temp);
 	enviarRTemperatura();
