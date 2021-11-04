@@ -64,7 +64,7 @@ void EINT3_IRQHandler(void){
 	        case '>':
 	            CambiarMenu();
 	            break;
-	        case 'F':
+	        default:
 	        	if(!(led==0)){
 				TIM_Cmd(LPC_TIM1, DISABLE);
 				led=0;

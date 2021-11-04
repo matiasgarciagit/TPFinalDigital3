@@ -7,6 +7,8 @@ uint8_t led=0;
 uint8_t mostrar=1;
 int16_t Temp;
 uint16_t temperaturaDMA;
+uint8_t auxretardo=0;
+
 
 void SetAlarma(void);
 void SetHora(void);
@@ -80,14 +82,17 @@ void configINT(void){
 	NVIC_SetPriority(EINT3_IRQn, 2);
 }
 
-void Antirebote(void){
+/*void Antirebote(void){
 	uint32_t i;
 	for(i=0;i<1500000;i++){};
 }
+*/
 
-void retardo10ms(void){
-	uint32_t i;
-	for(i=0;i<100000;i++){};
+void retardoms(void){
+	auxretardo=1;
+	TIM_Cmd(LPC_TIM2, ENABLE);
+	while(auxretardo==1){}
+
 }
 
 
