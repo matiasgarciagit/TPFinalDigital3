@@ -1,6 +1,6 @@
 
 void confADC(void){
-    //Configuramos ADC para que funicone con TIMER0 M1
+    //Configuramos ADC para que funcione con DMA
 
 	ADC_Init(LPC_ADC, 200000);
 	ADC_IntConfig(LPC_ADC,ADC_ADINTEN0,ENABLE);

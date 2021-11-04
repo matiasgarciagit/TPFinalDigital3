@@ -17,7 +17,7 @@ uint8_t menu=0;
 uint8_t hora;
 uint8_t minutos;
 int main(void){
-
+	//Configuraciones de perifericos y pines
 	config_GPIO();
 	confUart();
     confADC();
@@ -26,7 +26,7 @@ int main(void){
     confDMA();
 
     while(1) {
-
+    	//Bucle infinito para menu de hora o menu de temperatura
 		if(menu==0){
     		VerificarAlarma();
     		if(mostrar==1){
@@ -45,12 +45,11 @@ int main(void){
     return 0 ;
 }
 
-void EINT3_IRQHandler(void){
-	//Antirebote();
+void EINT3_IRQHandler(void){//Interrupciones por GPIO2 que corresponden al teclado
 	mostrar=1;
 	char tecla;
-	tecla = readkey();
-
+	tecla = readkey(); //Guardamos tecla presionada
+	//Por interrupción solo funcionan las siguientes teclas
 	switch(tecla){
 			case 'A':
 	            SetHora();
@@ -64,7 +63,7 @@ void EINT3_IRQHandler(void){
 	        case '>':
 	            CambiarMenu();
 	            break;
-	        default:
+	        case 'F': //Apaga alarma con la tecla escape solo si está sonando
 	        	if(!(led==0)){
 				TIM_Cmd(LPC_TIM1, DISABLE);
 				led=0;
@@ -76,7 +75,7 @@ void EINT3_IRQHandler(void){
 	LPC_GPIOINT->IO2IntClr |=(0b1111<<0);
 }
 
-void SetAlarma(void){
+void SetAlarma(void){//Menú de configuración de alarma
 	suelta();
 	uint8_t si=1;
 	uint8_t aux=1;
@@ -87,11 +86,11 @@ void SetAlarma(void){
 	UART_Send(LPC_UART0, mensaje12, sizeof(mensaje12), BLOCKING);
 
 	switch(presiona()){
-	case 'F':
+	case 'F'://Sale del menú y desactiva la alarma.
 		alarma=0;
 		return;
 
-	case 'E':
+	case 'E'://Configura la alarma
 		suelta();
 		while(aux){
 			consoleclear();
@@ -102,7 +101,7 @@ void SetAlarma(void){
 					suelta();
 					hora += ((int) presiona()) -48;
 					suelta();
-					if(hora>23){
+					if(hora>23 || hora<0){ //Verificamos que la hora es válida
 						consoleclear();
 						char mensaje2[]="Hora incorrecta, ingrese nuevamente:";
 						UART_Send(LPC_UART0, mensaje2, sizeof(mensaje2), BLOCKING);
@@ -119,7 +118,7 @@ void SetAlarma(void){
 					suelta();
 					minutos += ((int) presiona()) -48;
 					suelta();
-					if(minutos>59){
+					if(minutos>59 || minutos<0){//Verificamos que los minutos son válidos
 						consoleclear();
 						char mensaje4[]="Minutos incorrecto, ingrese nuevamente:";
 						UART_Send(LPC_UART0, mensaje4, sizeof(mensaje4), BLOCKING);
@@ -129,11 +128,11 @@ void SetAlarma(void){
 				consoleclear();
 				char mensaje5[]="La Alarma ingresada es ";
 				UART_Send(LPC_UART0, mensaje5, sizeof(mensaje5), BLOCKING);
-				setReloj(hora,minutos);
+				setRelojUART(hora,minutos);
 				enviarReloj(reloj);
-				char mensaje6[]=" .Si es correcta presione Enter";
+				char mensaje6[]=" . Si es correcta presione Enter";
 				UART_Send(LPC_UART0, mensaje6, sizeof(mensaje6), BLOCKING);
-				if(presiona() == 'E'){
+				if(presiona() == 'E'){//Si presiona entener se configura la alarma y si no se vuelve a la configuración
 					aux=0;
 					HoraAlarma=hora;
 					MinutosAlarma=minutos;
@@ -147,7 +146,7 @@ void SetAlarma(void){
 
 
 }
-void SetHora(void){
+void SetHora(void){//Menu de configuracion de hora
 	TIM_Cmd(LPC_TIM0, DISABLE);
 	suelta();
 
@@ -162,7 +161,7 @@ void SetHora(void){
 				suelta();
 				hora += ((int) presiona()) -48;
 				suelta();
-				if(hora>23){
+				if(hora>23 || hora<0){
 					consoleclear();
 					char mensaje2[]="Hora incorrecta, ingrese nuevamente:";
 					UART_Send(LPC_UART0, mensaje2, sizeof(mensaje2), BLOCKING);
@@ -179,7 +178,7 @@ void SetHora(void){
 				suelta();
 				minutos += ((int) presiona()) -48;
 				suelta();
-				if(minutos>59){
+				if(minutos>59 || minutos<0){
 					consoleclear();
 					char mensaje4[]="Minutos incorrecto, ingrese nuevamente:";
 					UART_Send(LPC_UART0, mensaje4, sizeof(mensaje4), BLOCKING);
@@ -189,9 +188,9 @@ void SetHora(void){
 			consoleclear();
 			char mensaje5[]="La hora ingresada es ";
 			UART_Send(LPC_UART0, mensaje5, sizeof(mensaje5), BLOCKING);
-			setReloj(hora,minutos);
+			setRelojUART(hora,minutos);
 			enviarReloj(reloj);
-			char mensaje6[]=" .Si es correcta presione Enter";
+			char mensaje6[]=" . Si es correcta presione Enter";
 			UART_Send(LPC_UART0, mensaje6, sizeof(mensaje6), BLOCKING);
 			if(presiona() == 'E'){
 				aux=0;
@@ -206,7 +205,7 @@ void SetHora(void){
 
 
 }
-void CambiarMenu(void){
+void CambiarMenu(void){//Cambia de menú al apretar algúna de las flechas "<" o ">"
 	if(menu==0){
 		menu=1;
 	}
@@ -215,7 +214,7 @@ void CambiarMenu(void){
 	}
 	//mostrar=1;
 }
-void VerificarAlarma(void){
+void VerificarAlarma(void){//Verifica si la alarma está activada, y si reloj y alarma coinciden
 	if(alarma==1){
 		if(HoraReloj==HoraAlarma){
 			if(MinutosReloj==MinutosAlarma){
@@ -225,23 +224,23 @@ void VerificarAlarma(void){
 	}
 
 }
-void MostrarTemp(void){
-	transmitirDMA();
-	Temp = (temperaturaDMA*80/4096)-20;
+void MostrarTemp(void){//Muestro la temperatura mediante UART
+	transmitirDMA();//Convierte entrada ADC y activa el DMA para tranferir el dato del ADC a memoria
+	Temp = (temperaturaDMA*80/4096)-20;//Adecuamos valor de la conversión para representarlo en grados
 	consoleclear();
-	setTemperatura(Temp);
+	setTemperaturaUART(Temp);
 	enviarRTemperatura();
 	mostrar=0;
 
 }
-void MostrarHora(void){
+void MostrarHora(void){//Muestro la hora mediante UART
     consoleclear();
-    setReloj(HoraReloj,MinutosReloj);
+    setRelojUART(HoraReloj,MinutosReloj);
     enviarReloj(reloj);
     mostrar=0;
 }
 
-void SonarAlarma(void){
+void SonarAlarma(void){//Activamos Timer 1 para alarma
 	TIM_Cmd(LPC_TIM1, ENABLE);
 	led =1;
 }

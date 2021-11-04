@@ -1,7 +1,7 @@
 void retardo();
 char cvalue;
 char keypress;
-
+//Mapeo del teclado
 char keypad[5][4]={
         {'A','B','#','*'},
         {'1','2','3','m'},
@@ -11,7 +11,8 @@ char keypad[5][4]={
         };
 
 
-char presiona(){
+char presiona(){//Espera a que se presione una tecla y retorna su valor
+				//Con algoritmo antirebote
 	uint8_t cont=0;
 	uint8_t i;
 	int8_t j;
@@ -45,9 +46,9 @@ char presiona(){
 }
 
 
-char readkey(){
+char readkey(){//Algoritmo de lectura de teclado, haya presionado una tecla o no
 	uint8_t cont=0;
-	uint8_t aux=20;
+	uint8_t aux=5;
 	uint8_t i;
 	int8_t j;
     while(aux){
@@ -58,6 +59,7 @@ char readkey(){
             for(j=0;j<4;j++){
                 if(!((LPC_GPIO2->FIOPIN)&(1<<j))){
                 	cont++;
+                	aux=5;
 					if(cont==5){
 						keypress=keypad[8-i][j];
 						return keypad[8-i][j];
@@ -80,7 +82,7 @@ char readkey(){
     return 'r';
 }
 
-void suelta(){
+void suelta(){//Comprueba que no haya ninguna tecla presionada
 	uint8_t i;
 	int8_t j;
 	LPC_GPIO2->FIOPIN = (31<<4); //(11111||1111)

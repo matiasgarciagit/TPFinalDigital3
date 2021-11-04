@@ -1,11 +1,14 @@
 void transmitirDMA();
 void DMA_IRQHandler (void);
-/* Terminal Counter flag for Channel 0 */
+
+/* Flag que avisa cuando se termina la transferencia en el canal 0 */
 __IO uint32_t Channel0_TC;
 
-/* Error Counter flag for Channel 0 */
+/* Flag que avisa cuando se produce un error  en la transferencia en el canal 0  */
 __IO uint32_t Channel0_Err;
+
 #define DMA_SIZE		1
+
 uint32_t adc_value;
 GPDMA_Channel_CFG_Type GPDMACfg;
 
@@ -32,11 +35,10 @@ void DMA_IRQHandler (void)
 
 //Estructura de configuracion del DMA
 void confDMA(){
-	/* GPDMA block section -------------------------------------------- */
-	/* Disable GPDMA interrupt */
+
 	NVIC_DisableIRQ(DMA_IRQn);
 	/* preemption = 1, sub-priority = 1 */
-	NVIC_SetPriority(DMA_IRQn, ((0x01<<3)|0x01));
+	NVIC_SetPriority(DMA_IRQn, (2));
 	/* Initialize GPDMA controller */
 	GPDMA_Init();
 

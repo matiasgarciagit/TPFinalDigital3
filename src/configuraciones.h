@@ -1,3 +1,4 @@
+//Declaramos variables globales
 uint8_t HoraAlarma;
 uint8_t HoraReloj;
 uint8_t MinutosAlarma;
@@ -9,7 +10,7 @@ int16_t Temp;
 uint16_t temperaturaDMA;
 uint8_t auxretardo=0;
 
-
+//Prototipos
 void SetAlarma(void);
 void SetHora(void);
 void CambiarMenu(void);
@@ -18,7 +19,7 @@ void MostrarTemp(void);
 void MostrarHora(void);
 void SonarAlarma(void);
 
-void config_GPIO(){
+void config_GPIO(){//Configuraciones de pines
 	//Teclado
     //Entradas (columnas)
 
@@ -74,7 +75,7 @@ void config_GPIO(){
 
 }
 
-void configINT(void){
+void configINT(void){//Configuracion de interrupciones por GPIO para el teclado
 	LPC_GPIOINT->IO2IntEnF |= (0b1111<<0);
 	LPC_GPIOINT->IO2IntClr |= (0b1111<<0);
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
@@ -82,13 +83,7 @@ void configINT(void){
 	NVIC_SetPriority(EINT3_IRQn, 2);
 }
 
-/*void Antirebote(void){
-	uint32_t i;
-	for(i=0;i<1500000;i++){};
-}
-*/
-
-void retardoms(void){
+void retardoms(void){//Retardo por Timer 2
 	auxretardo=1;
 	TIM_Cmd(LPC_TIM2, ENABLE);
 	while(auxretardo==1){}

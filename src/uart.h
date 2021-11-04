@@ -4,7 +4,7 @@ uint8_t clear[] = "\033[H\033[J";
 uint8_t reloj[5];
 int16_t temperatura[5];
 
-void setReloj(uint8_t horas, uint8_t minutos){
+void setRelojUART(uint8_t horas, uint8_t minutos){//Conversión de reloj en enteros a reloj en string para transmitir
 	reloj[2]=':';
 	char charValue;
 	int aux;
@@ -29,7 +29,7 @@ void setReloj(uint8_t horas, uint8_t minutos){
 
 }
 
-void setTemperatura(int16_t valor){
+void setTemperaturaUART(int16_t valor){//Conversión de temperatura en enteros a string para transmitir
     char charValue;
     int aux;
     if(valor>=0){
@@ -57,14 +57,14 @@ void setTemperatura(int16_t valor){
 void confUart(void){
 	UART_CFG_Type UARTConfigStruct;
 	UART_FIFO_CFG_Type UARTFIFOConfigStruct;
-	//configuraci�n por defecto:
+	//configuración por defecto:
 	UART_ConfigStructInit(&UARTConfigStruct);
-	//inicializa perif�rico
+	//inicializa periférico
 	UART_Init(LPC_UART0, &UARTConfigStruct);
 	UART_FIFOConfigStructInit(&UARTFIFOConfigStruct);
 	//Inicializa FIFO
 	UART_FIFOConfig(LPC_UART0, &UARTFIFOConfigStruct);
-	//Habilita transmisi�n
+	//Habilita transmisión
 	UART_TxCmd(LPC_UART0, ENABLE);
 }
 

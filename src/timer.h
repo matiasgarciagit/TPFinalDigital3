@@ -36,7 +36,7 @@ void confTimers(void){
     NVIC_EnableIRQ(TIMER1_IRQn);
 
 
-    //TIMER2 M0 X mSegundos
+    //TIMER2 M0 5m segundos
 	struct_config.PrescaleOption	=	TIM_PRESCALE_USVAL;
 	struct_config.PrescaleValue		=	500;
 
@@ -54,6 +54,7 @@ void confTimers(void){
 
 
     // Prioridades
+	NVIC_SetPriority(TIMER2_IRQn, 1);
     NVIC_SetPriority(TIMER1_IRQn, 1);
     NVIC_SetPriority(TIMER0_IRQn, 0);
 

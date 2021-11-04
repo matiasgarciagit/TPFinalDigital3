@@ -1,14 +1,14 @@
 F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:928:22:NVIC_EnableIRQ	16	static
 F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:941:22:NVIC_DisableIRQ	16	static
 F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMSISv2p00_LPC17xx\inc/core_cm3.h:1012:22:NVIC_SetPriority	16	static
-../src/configuraciones.h:21:6:config_GPIO	16	static
-../src/configuraciones.h:77:6:configINT	8	static
-../src/configuraciones.h:91:6:retardoms	8	static
+../src/configuraciones.h:22:6:config_GPIO	16	static
+../src/configuraciones.h:78:6:configINT	8	static
+../src/configuraciones.h:92:6:retardoms	8	static
 ../src/TecladoMatricial.h:14:6:presiona	16	static
 ../src/TecladoMatricial.h:48:6:readkey	16	static
 ../src/TecladoMatricial.h:83:6:suelta	16	static
-../src/uart.h:7:6:setReloj	24	static
-../src/uart.h:32:6:setTemperatura	24	static
+../src/uart.h:7:6:setRelojUART	24	static
+../src/uart.h:32:6:setTemperaturaUART	24	static
 ../src/uart.h:57:6:confUart	24	static
 ../src/uart.h:71:6:consoleclear	8	static
 ../src/uart.h:75:6:enviarReloj	8	static
@@ -23,10 +23,10 @@ F:\Users\Matias Garcia\Documents\MCUXpressoIDE_11.4.0_6237\workspace - copia\CMS
 ../src/dma.h:61:6:transmitirDMA	16	static
 ../src/main.c:19:5:main	8	static
 ../src/main.c:48:6:EINT3_IRQHandler	16	static
-../src/main.c:79:6:SetAlarma	264	static
-../src/main.c:150:6:SetHora	168	static
-../src/main.c:209:6:CambiarMenu	4	static
-../src/main.c:218:6:VerificarAlarma	8	static
-../src/main.c:228:6:MostrarTemp	8	static
-../src/main.c:237:6:MostrarHora	8	static
-../src/main.c:244:6:SonarAlarma	8	static
+../src/main.c:78:6:SetAlarma	264	static
+../src/main.c:149:6:SetHora	168	static
+../src/main.c:208:6:CambiarMenu	4	static
+../src/main.c:217:6:VerificarAlarma	8	static
+../src/main.c:227:6:MostrarTemp	8	static
+../src/main.c:236:6:MostrarHora	8	static
+../src/main.c:243:6:SonarAlarma	8	static
