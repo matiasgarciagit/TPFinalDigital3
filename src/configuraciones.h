@@ -77,7 +77,7 @@ void configINT(void){
 	LPC_GPIOINT->IO2IntClr |= (0b1111<<0);
 	LPC_GPIO2->FIOCLR |= (0b11111<<4);
 	NVIC_EnableIRQ(EINT3_IRQn);
-	NVIC_SetPriority(EINT3_IRQn, 3);
+	NVIC_SetPriority(EINT3_IRQn, 2);
 }
 
 void Antirebote(void){
