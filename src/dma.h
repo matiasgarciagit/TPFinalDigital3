@@ -48,7 +48,7 @@ void confDMA(){
     GPDMACfg.TransferSize = DMA_SIZE;	//Tamaño de la transferencia
     GPDMACfg.TransferWidth = 0;	//No usado
     GPDMACfg.TransferType = GPDMA_TRANSFERTYPE_P2M;
-    GPDMACfg.SrcConn = GPDMA_CONN_ADC;	//La fuente es memoria => no connection
+    GPDMACfg.SrcConn = GPDMA_CONN_ADC;	
     GPDMACfg.DstConn = 0;
     GPDMACfg.DMALLI = 0;
     GPDMA_Setup(&GPDMACfg);
